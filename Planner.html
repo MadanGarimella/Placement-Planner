@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Month Full Stack & DSA Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Visualization & Content Choices:
+        - Roadmap Text: Presented in lists and paragraphs within expandable weekly sections. Goal: Inform. Method: HTML/Tailwind. Interaction: Expand/collapse, checklists. Justification: Clarity and progress tracking.
+        - Monthly Focus Chart (Example - Month 1): Donut chart showing approximate time allocation (Frontend, DSA, Basics). Goal: Inform/Overview. Method: Chart.js Canvas. Interaction: Static display. Justification: Quick visual summary of monthly priorities.
+        - Overall Skill Allocation Chart: Bar chart visualizing the distribution of learning across key areas (Frontend, Backend, DSA, Projects, Interview Prep). Goal: Inform/Overview. Method: Chart.js Canvas. Interaction: Static display. Justification: High-level view of effort distribution.
+        - DSA Topics: Presented as lists with checkboxes. Goal: Inform/Track. Method: HTML/JS. Interaction: Checklists. Justification: Detailed tracking of DSA progress.
+        - CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .tab-active {
+            border-bottom-width: 4px;
+            border-color: #0284c7; /* sky-600 */
+            color: #0284c7;
+            font-weight: 600;
+        }
+        .tab-inactive {
+            color: #4b5563; /* gray-600 */
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .checkbox-custom:checked {
+            background-color: #0284c7; /* sky-600 */
+            border-color: #0284c7;
+        }
+        .checkbox-custom:checked::after {
+            content: '✔';
+            color: white;
+            display: block;
+            text-align: center;
+            line-height: 1.25rem; /* Adjust based on checkbox size */
+            font-size: 0.875rem; /* Adjust for checkmark size */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 400px; /* Max width for donut/pie charts */
+            height: auto; /* Maintain aspect ratio */
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 2rem; /* Space for legend */
+        }
+        .bar-chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 350px; /* Fixed height or responsive */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Accordion styles */
+        .accordion-header {
+            cursor: pointer;
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .accordion-content.open {
+            max-height: 2000px; /* Adjust as needed for content */
+            transition: max-height 0.5s ease-in;
+        }
+        .accordion-arrow {
+            transition: transform 0.3s ease;
+        }
+        .accordion-arrow.open {
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body class="bg-stone-100 text-stone-800">
+    <div class="container mx-auto p-4 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-sky-700">3-Month Full Stack & DSA Roadmap</h1>
+            <p class="text-lg text-stone-600 mt-2">Your interactive guide to becoming a job-ready Full Stack Developer.</p>
+        </header>
+
+        <nav class="mb-8 sticky top-0 bg-stone-100 z-10 shadow-sm rounded-lg">
+            <ul class="flex flex-wrap justify-center border-b border-stone-300">
+                <li class="mr-1">
+                    <a href="#" class="inline-block py-3 px-3 md:px-5 tab-active" data-tab="month1">Month 1</a>
+                </li>
+                <li class="mr-1">
+                    <a href="#" class="inline-block py-3 px-3 md:px-5 tab-inactive" data-tab="month2">Month 2</a>
+                </li>
+                <li class="mr-1">
+                    <a href="#" class="inline-block py-3 px-3 md:px-5 tab-inactive" data-tab="month3">Month 3</a>
+                </li>
+                <li>
+                    <a href="#" class="inline-block py-3 px-3 md:px-5 tab-inactive" data-tab="generalPrep">General Prep</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <section id="month1" class="content-section active">
+                <h2 class="text-3xl font-semibold text-sky-600 mb-6 text-center">Month 1: Foundations & Frontend Fundamentals 🧱</h2>
+                <p class="text-md text-stone-700 mb-6 text-center">This month focuses on building a strong foundation in web development basics and diving into frontend technologies with React. You'll also kickstart your DSA journey.</p>
+                
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Monthly Focus Distribution</h3>
+                        <div class="chart-container">
+                            <canvas id="month1FocusChart"></canvas>
+                        </div>
+                        <p class="text-sm text-stone-600 mt-2 text-center">Approximate time allocation for key areas in Month 1.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-center">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Key Goals for Month 1</h3>
+                        <ul class="list-disc list-inside text-stone-700 space-y-2">
+                            <li>Build simple static websites and understand core webpage structure.</li>
+                            <li>Grasp advanced JavaScript concepts for modern web development.</li>
+                            <li>Understand modern frontend development with React and build interactive UIs.</li>
+                            <li>Begin consistent Data Structures and Algorithms (DSA) practice.</li>
+                            <li>Master Git and GitHub for version control.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-md accordion-item">
+                    <div class="accordion-header flex justify-between items-center py-3">
+                        <h3 class="text-2xl font-semibold text-sky-600">Weeks 1-2: HTML, CSS, and Basic JavaScript</h3>
+                        <span class="accordion-arrow text-sky-600 text-2xl font-bold transform transition-transform duration-300">&#x276F;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="mt-4 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">HTML5:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Semantic HTML (e.g., <code>&lt;article&gt;</code>, <code>&lt;nav&gt;</code>)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Forms (input types, validation)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Tables</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Multimedia (audio, video)</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">CSS3:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Selectors, Box Model</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Flexbox, Grid</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Responsive Design (media queries)</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">JavaScript Basics:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Variables, Data Types, Operators</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Control Flow, Functions</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> DOM Manipulation, Event Handling</label></li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Practice Projects:</h4>
+                                <ul class="list-disc list-inside text-stone-600 space-y-1">
+                                    <li>Personal Portfolio Page</li>
+                                    <li>Simple Landing Page</li>
+                                    <li>Recipe Card Layout</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-md accordion-item">
+                     <div class="accordion-header flex justify-between items-center py-3">
+                        <h3 class="text-2xl font-semibold text-sky-600">Weeks 3-4: Advanced JavaScript & Intro to React</h3>
+                        <span class="accordion-arrow text-sky-600 text-2xl font-bold transform transition-transform duration-300">&#x276F;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="mt-4 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Advanced JavaScript:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> ES6+ Features (Arrow functions, Promises, async/await)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Modules (import/export)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> OOP Concepts (conceptual)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Error Handling (try...catch)</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">React Basics:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Components, JSX, Props, State (useState)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Lifecycle (useEffect), Event Handling</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Conditional Rendering, Lists & Keys</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Version Control (Git & GitHub):</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Core Git commands (commit, push, pull, branch)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> GitHub: Repositories, Pull Requests</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">DSA Kick-start:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Arrays: Basic operations, two-pointer</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Strings: Manipulation, basic pattern searching</label></li>
+                                </ul>
+                            </div>
+                            <div class="md:col-span-2">
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Practice Projects:</h4>
+                                <ul class="list-disc list-inside text-stone-600 space-y-1">
+                                    <li>Simple calculator using React</li>
+                                    <li>Basic to-do list application (frontend only) using React</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="month2" class="content-section">
+                <h2 class="text-3xl font-semibold text-sky-600 mb-6 text-center">Month 2: Backend Development & Database Integration ⚙️</h2>
+                <p class="text-md text-stone-700 mb-6 text-center">This month shifts focus to server-side development with Node.js and Express.js, database integration with MongoDB, and building your first full-stack application. DSA practice continues with more complex structures.</p>
+
+                 <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Monthly Focus Distribution</h3>
+                         <div class="chart-container">
+                            <canvas id="month2FocusChart"></canvas>
+                        </div>
+                        <p class="text-sm text-stone-600 mt-2 text-center">Approximate time allocation for key areas in Month 2.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-center">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Key Goals for Month 2</h3>
+                        <ul class="list-disc list-inside text-stone-700 space-y-2">
+                            <li>Master Node.js and Express.js for backend development.</li>
+                            <li>Design and build RESTful APIs.</li>
+                            <li>Understand NoSQL databases with MongoDB and Mongoose.</li>
+                            <li>Build a complete MERN stack application.</li>
+                            <li>Solidify DSA skills with Linked Lists, Stacks, Queues, Trees, and Hashing.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-md accordion-item">
+                     <div class="accordion-header flex justify-between items-center py-3">
+                        <h3 class="text-2xl font-semibold text-sky-600">Weeks 5-6: Node.js, Express.js, and APIs</h3>
+                        <span class="accordion-arrow text-sky-600 text-2xl font-bold transform transition-transform duration-300">&#x276F;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="mt-4 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Node.js & Express.js:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Node.js runtime, NPM, Modules</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Express.js server setup, Routing, Middleware</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">RESTful APIs & JSON:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> REST principles, API design</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Handling requests/responses, Status codes</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Working with JSON data</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">DSA Focus:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Linked Lists (Singly, Doubly, Circular)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Stacks & Queues (Implementations, Problems)</label></li>
+                                </ul>
+                            </div>
+                             <div class="md:col-span-2">
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Practice Projects:</h4>
+                                <ul class="list-disc list-inside text-stone-600 space-y-1">
+                                    <li>Simple REST API for a blog (in-memory data)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-md accordion-item">
+                    <div class="accordion-header flex justify-between items-center py-3">
+                        <h3 class="text-2xl font-semibold text-sky-600">Weeks 7-8: Databases (MongoDB) & Full Stack Integration</h3>
+                        <span class="accordion-arrow text-sky-600 text-2xl font-bold transform transition-transform duration-300">&#x276F;</span>
+                    </div>
+                    <div class="accordion-content">
+                         <div class="mt-4 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">MongoDB & Mongoose:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> NoSQL concepts, MongoDB setup</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> CRUD operations, Basic querying</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Mongoose: Schemas, Models, Validation</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Full Stack Integration:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Connecting React to Express API (fetch/axios)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Authentication basics (Password hashing, JWT concept)</label></li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">DSA Focus:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Trees (BT, BST, Traversals)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Hashing (Hash functions, Collision resolution)</label></li>
+                                </ul>
+                            </div>
+                            <div class="md:col-span-2">
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Project: First Full-Stack MERN Application</h4>
+                                <p class="text-stone-600 mb-1">Ideas: To-Do app with user accounts, Simple Note-taking app, Basic Blogging platform.</p>
+                                <p class="text-stone-600">Features: User registration/login, CRUD operations specific to user.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="month3" class="content-section">
+                <h2 class="text-3xl font-semibold text-sky-600 mb-6 text-center">Month 3: Advanced Topics, DSA Mastery & Interview Prep 🎯</h2>
+                <p class="text-md text-stone-700 mb-6 text-center">The final month is about diving into advanced full-stack concepts, achieving DSA mastery through intensive practice, and gearing up for interviews.</p>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-lg">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Monthly Focus Distribution</h3>
+                         <div class="chart-container">
+                            <canvas id="month3FocusChart"></canvas>
+                        </div>
+                        <p class="text-sm text-stone-600 mt-2 text-center">Approximate time allocation for key areas in Month 3.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg flex flex-col justify-center">
+                        <h3 class="text-xl font-semibold text-sky-600 mb-3">Key Goals for Month 3</h3>
+                        <ul class="list-disc list-inside text-stone-700 space-y-2">
+                            <li>Explore advanced React state management and optional WebSockets.</li>
+                            <li>Learn and implement testing strategies for frontend and backend.</li>
+                            <li>Deploy full-stack applications to cloud platforms.</li>
+                            <li>Achieve DSA mastery with Heaps, Graphs, Dynamic Programming, and Greedy Algorithms.</li>
+                            <li>Prepare comprehensively for technical and behavioral interviews.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-md accordion-item">
+                    <div class="accordion-header flex justify-between items-center py-3">
+                        <h3 class="text-2xl font-semibold text-sky-600">Weeks 9-10: Advanced Full Stack & Deployment</h3>
+                        <span class="accordion-arrow text-sky-600 text-2xl font-bold transform transition-transform duration-300">&#x276F;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="mt-4 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Advanced React & Testing:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> State Management (Context API, Redux/Zustand basics)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> WebSockets (Optional - Socket.io)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Unit Testing (Jest, React Testing Library, Supertest)</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Deployment:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Frontend: Vercel, Netlify</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Backend: Heroku, AWS/GCP basics</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Database: MongoDB Atlas</label></li>
+                                </ul>
+                            </div>
+                             <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">DSA Focus:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Heaps (Min/Max, Priority Queues)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Graphs (Representations, BFS, DFS, Basic Algorithms)</label></li>
+                                </ul>
+                            </div>
+                            <div class="md:col-span-2">
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Project: Complete & Polish Main Full-Stack Project(s)</h4>
+                                <p class="text-stone-600">Add features, improve UI/UX, write tests, and deploy. Aim for 1-2 impressive projects.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8 bg-white p-6 rounded-lg shadow-md accordion-item">
+                    <div class="accordion-header flex justify-between items-center py-3">
+                        <h3 class="text-2xl font-semibold text-sky-600">Weeks 11-12: Intensive DSA, System Design & Interview Prep</h3>
+                        <span class="accordion-arrow text-sky-600 text-2xl font-bold transform transition-transform duration-300">&#x276F;</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="mt-4 grid md:grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">DSA Mastery & Problem Solving:</h4>
+                                <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Daily LeetCode/GeeksforGeeks practice</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Master Time/Space Complexity</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Dynamic Programming (Common patterns)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Greedy Algorithms</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Bit Manipulation basics</label></li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Core CS & System Design Basics:</h4>
+                                 <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> OS, DBMS, Networks (Conceptual)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> System Design: Scalability, Load Balancing, Caching</label></li>
+                                </ul>
+                            </div>
+                            <div class="md:col-span-2">
+                                <h4 class="text-lg font-medium text-stone-700 mb-2">Interview Preparation:</h4>
+                                 <ul class="list-none space-y-1">
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Resume Building & LinkedIn Optimization</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Mock Interviews (Technical & Behavioral)</label></li>
+                                    <li><label class="flex items-center"><input type="checkbox" class="mr-2 checkbox-custom w-5 h-5 appearance-none border border-stone-400 rounded-sm focus:ring-sky-500"> Off-Campus Application Strategy</label></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="generalPrep" class="content-section">
+                <h2 class="text-3xl font-semibold text-sky-600 mb-6 text-center">General Preparation Strategy (Ongoing) 🗓️</h2>
+                <p class="text-md text-stone-700 mb-8 text-center">These are crucial strategies to follow throughout your 3-month journey to maximize your chances of success.</p>
+                
+                <div class="bg-white p-6 rounded-lg shadow-lg mb-8">
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">Overall Skill Allocation</h3>
+                    <div class="bar-chart-container">
+                        <canvas id="overallSkillChart"></canvas>
+                    </div>
+                    <p class="text-sm text-stone-600 mt-2 text-center">A visual representation of how your efforts might be distributed across key learning areas over the entire 3-month period.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">1. Build a Strong Online Presence</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>Active GitHub with well-documented projects.</li>
+                            <li>Professional and updated LinkedIn profile.</li>
+                            <li>Portfolio Website (Optional but Recommended).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">2. Project Portfolio is Key</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>1-2 solid full-stack projects.</li>
+                            <li>Explain technical choices, challenges, and solutions.</li>
+                            <li>Be ready to demo and walk through code.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">3. DSA, DSA, DSA</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>Crucial for MNC screening and interviews.</li>
+                            <li>Practice consistently: solve problems daily.</li>
+                            <li>Understand concepts and trade-offs.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">4. Master Core Concepts</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>How the web works (HTTP, DNS, APIs).</li>
+                            <li>Basic software engineering principles (DRY, KISS).</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">5. Behavioral Interviews</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>Prepare for common questions (STAR method).</li>
+                            <li>Research company culture and values.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">6. Networking</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>Connect with industry professionals.</li>
+                            <li>Engage in online developer communities.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">7. Stay Updated</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>Follow tech blogs, news, and influencers.</li>
+                            <li>Be aware of emerging trends.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">8. Practice Aptitude Tests</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>Quantitative, Logical Reasoning, Verbal Ability.</li>
+                        </ul>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="text-xl font-semibold text-sky-500 mb-2">9. Mock Interviews - The Secret Weapon</h4>
+                        <ul class="list-disc list-inside text-stone-600 space-y-1">
+                            <li>Practice extensively with peers or platforms.</li>
+                            <li>Focus on articulating your thought process.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="mt-10 bg-sky-50 p-6 rounded-lg shadow">
+                    <h3 class="text-2xl font-semibold text-sky-700 mb-3">Important Considerations</h3>
+                    <ul class="list-disc list-inside text-stone-700 space-y-2">
+                        <li><strong>Consistency:</strong> Stick to your schedule. Focused daily work is key.</li>
+                        <li><strong>Hands-on Practice:</strong> Prioritize building and solving over passive learning.</li>
+                        <li><strong>Don't Get Stuck:</strong> Ask for help when needed. Move on and revisit.</li>
+                        <li><strong>Rest & Revision:</strong> Take breaks and regularly revise learned concepts.</li>
+                        <li><strong>Adaptability:</strong> Adjust this template to your learning pace and prior knowledge.</li>
+                    </ul>
+                    <p class="mt-4 text-lg font-semibold text-sky-600">This journey requires dedication and perseverance. Stay focused, celebrate small wins, and believe in your ability to achieve your goal! Good luck!</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center mt-12 py-6 border-t border-stone-300">
+            <p class="text-stone-600">&copy; 2024 Interactive Roadmap. Inspired by expert placement guidance.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('nav a');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            // Tab navigation
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    tabs.forEach(t => {
+                        t.classList.remove('tab-active');
+                        t.classList.add('tab-inactive');
+                    });
+                    this.classList.add('tab-active');
+                    this.classList.remove('tab-inactive');
+
+                    contentSections.forEach(section => section.classList.remove('active'));
+                    document.getElementById(this.dataset.tab).classList.add('active');
+                    
+                    // Scroll to top of content for better UX on tab switch
+                    window.scrollTo({ top: document.querySelector('nav').offsetTop - 20, behavior: 'smooth' });
+                });
+            });
+
+            // Accordion functionality
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                const content = item.querySelector('.accordion-content');
+                const arrow = item.querySelector('.accordion-arrow');
+
+                header.addEventListener('click', () => {
+                    const isOpen = content.classList.contains('open');
+                    
+                    // Optional: Close other open accordions
+                    // accordionItems.forEach(otherItem => {
+                    //     if (otherItem !== item) {
+                    //         otherItem.querySelector('.accordion-content').classList.remove('open');
+                    //         otherItem.querySelector('.accordion-arrow').classList.remove('open');
+                    //     }
+                    // });
+
+                    content.classList.toggle('open');
+                    arrow.classList.toggle('open');
+                });
+            });
+            
+            // Helper function to wrap text for chart labels
+            function wrapText(ctx, text, maxWidth) {
+                const words = text.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    const word = words[i];
+                    const width = ctx.measureText(currentLine + " " + word).width;
+                    if (width < maxWidth) {
+                        currentLine += " " + word;
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            }
+
+            // Chart.js: Month 1 Focus Chart (Donut)
+            const month1Ctx = document.getElementById('month1FocusChart')?.getContext('2d');
+            if (month1Ctx) {
+                new Chart(month1Ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Frontend (HTML, CSS, JS, React)', 'DSA Kick-start', 'Version Control & Basics'],
+                        datasets: [{
+                            label: 'Month 1 Focus',
+                            data: [60, 25, 15], // Approximate percentages
+                            backgroundColor: [
+                                'rgba(59, 130, 246, 0.7)', // blue-500
+                                'rgba(16, 185, 129, 0.7)', // emerald-500
+                                'rgba(249, 115, 22, 0.7)'  // orange-500
+                            ],
+                            borderColor: [
+                                'rgba(59, 130, 246, 1)',
+                                'rgba(16, 185, 129, 1)',
+                                'rgba(249, 115, 22, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 15,
+                                    font: { size: 12 }
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed !== null) {
+                                            label += context.parsed + '%';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Chart.js: Month 2 Focus Chart (Donut)
+            const month2Ctx = document.getElementById('month2FocusChart')?.getContext('2d');
+            if (month2Ctx) {
+                new Chart(month2Ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Backend (Node, Express)', 'Databases (MongoDB)', 'Full Stack Integration', 'DSA (Lists, Trees, Hash)'],
+                        datasets: [{
+                            label: 'Month 2 Focus',
+                            data: [35, 20, 15, 30], // Approximate percentages
+                            backgroundColor: [
+                                'rgba(139, 92, 246, 0.7)', // violet-500
+                                'rgba(239, 68, 68, 0.7)',  // red-500
+                                'rgba(245, 158, 11, 0.7)', // amber-500
+                                'rgba(16, 185, 129, 0.7)'  // emerald-500
+                            ],
+                            borderColor: [
+                                'rgba(139, 92, 246, 1)',
+                                'rgba(239, 68, 68, 1)',
+                                'rgba(245, 158, 11, 1)',
+                                'rgba(16, 185, 129, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                         plugins: {
+                            legend: { position: 'bottom', labels: { padding: 15, font: { size: 12 } } },
+                            tooltip: { callbacks: { label: (c) => `${c.label}: ${c.parsed}%` } }
+                        }
+                    }
+                });
+            }
+            
+            // Chart.js: Month 3 Focus Chart (Donut)
+            const month3Ctx = document.getElementById('month3FocusChart')?.getContext('2d');
+            if (month3Ctx) {
+                new Chart(month3Ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Advanced Full Stack & Deployment', 'DSA Mastery (Graphs, DP, Greedy)', 'Interview Prep & System Design'],
+                        datasets: [{
+                            label: 'Month 3 Focus',
+                            data: [30, 40, 30], // Approximate percentages
+                            backgroundColor: [
+                                'rgba(34, 197, 94, 0.7)',  // green-500
+                                'rgba(217, 70, 239, 0.7)', // fuchsia-500
+                                'rgba(14, 165, 233, 0.7)'  // sky-500
+                            ],
+                             borderColor: [
+                                'rgba(34, 197, 94, 1)',
+                                'rgba(217, 70, 239, 1)',
+                                'rgba(14, 165, 233, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { padding: 15, font: { size: 12 } } },
+                            tooltip: { callbacks: { label: (c) => `${c.label}: ${c.parsed}%` } }
+                        }
+                    }
+                });
+            }
+
+            // Chart.js: Overall Skill Allocation (Bar Chart)
+            const overallSkillCtx = document.getElementById('overallSkillChart')?.getContext('2d');
+            if (overallSkillCtx) {
+                new Chart(overallSkillCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Frontend Development', 'Backend Development', 'Data Structures & Algorithms', 'Projects & Deployment', 'Interview Preparation'],
+                        datasets: [{
+                            label: 'Overall Effort Distribution (Approx. %)',
+                            data: [25, 25, 30, 10, 10], // Estimated percentages
+                            backgroundColor: [
+                                'rgba(59, 130, 246, 0.6)',
+                                'rgba(139, 92, 246, 0.6)',
+                                'rgba(16, 185, 129, 0.6)',
+                                'rgba(249, 115, 22, 0.6)',
+                                'rgba(14, 165, 233, 0.6)'
+                            ],
+                            borderColor: [
+                                'rgba(59, 130, 246, 1)',
+                                'rgba(139, 92, 246, 1)',
+                                'rgba(16, 185, 129, 1)',
+                                'rgba(249, 115, 22, 1)',
+                                'rgba(14, 165, 233, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y', // Horizontal bar chart
+                        responsive: true,
+                        maintainAspectRatio: false, // Important for fixed height container
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 100, // Assuming percentages
+                                ticks: {
+                                    callback: function(value) { return value + "%" }
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    font: { size: 10 }, // Adjust font size for y-axis labels
+                                    // autoSkip: false, // Ensure all labels are shown
+                                    // maxRotation: 0, // Prevent rotation
+                                    // minRotation: 0,
+                                    // callback: function(value, index, values) { // Custom label wrapping
+                                    //     const label = this.getLabelForValue(value);
+                                    //     return wrapText(overallSkillCtx, label, 80); // 80px max width for label
+                                    // }
+                                }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: false // Or position: 'top' if preferred
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+</body>
+</html>
